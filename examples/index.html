@@ -28,6 +28,7 @@
     <script type="module">
       import {
         Color,
+        Clock,
         LinearFilter,
         Matrix4,
         NearestFilter,
@@ -66,13 +67,18 @@
       const raymarcher = new Raymarcher({});
       scene.add(raymarcher);
 
-      renderer.setAnimationLoop((time) => {
-        time /= 1000;
+      const clock = new Clock();
+      const tick = () => {
+        const t = clock.getElapsedTime()
+        raymarcher.userData.time = t;
 
         controls.update();
         stats.update();
         renderer.render(scene, camera);
-      });
+
+        window.requestAnimationFrame(tick);
+      };
+      tick();
     </script>
   </body>
 </html>

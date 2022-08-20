@@ -9,6 +9,7 @@ struct SDF {
 out vec4 fragColor;
 in vec3 ray;
 
+uniform float time;
 uniform vec3 cameraDirection;
 uniform float cameraFar;
 uniform float cameraFov;

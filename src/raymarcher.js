@@ -48,6 +48,7 @@ class Raymarcher extends Mesh {
         MIN_DISTANCE: '0.005',
       },
       uniforms: {
+        time: { value: 0 },
         cameraDirection: { value: new Vector3() },
         cameraFar: { value: 0 },
         cameraFov: { value: 0 },
@@ -57,8 +58,14 @@ class Raymarcher extends Mesh {
     });
     const { defines, uniforms } = material;
     this.userData = {
-      raymarcher: new Mesh(plane, material),
+      get time() {
+        return uniforms.time.value;
+      },
+      set time(value) {
+        uniforms.time.value = value;
+      },
       resolution: 1,
+      raymarcher: new Mesh(plane, material),
       target,
     };
     this.matrixAutoUpdate = this.userData.raymarcher.matrixAutoUpdate = false;
